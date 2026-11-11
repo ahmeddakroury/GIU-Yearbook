@@ -1,23 +1,24 @@
-import { Component, computed, input, signal } from '@angular/core';
+import { Component, computed, inject, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Student } from '../../models/student.model';
+import { SavedService } from '../../services/saved.service';
 
 @Component({
-  selector: 'app-student-card',
   imports: [RouterLink],
-  templateUrl: './student-card.html',
+  selector: 'app-student-card',
   styleUrl: './student-card.css',
+  templateUrl: './student-card.html',
 })
 export class StudentCard {
   readonly student = input.required<Student>();
 
-  private readonly imageFailed = signal(false);
+  private readonly saved = inject(SavedService);
 
-  protected readonly photoSrc = computed(() =>
-    this.imageFailed() ? 'images/placeholder-portrait.svg' : this.student().photo,
-  );
+  protected readonly isSaved = computed(() => this.saved.isSaved(this.student().id));
 
-  protected onImageError(): void {
-    this.imageFailed.set(true);
+  protected onToggleSaved(event: Event): void {
+    event.preventDefault();
+    event.stopPropagation();
+    this.saved.toggle(this.student().id);
   }
 }

@@ -1,55 +1,73 @@
 .card {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
+  position: relative;
+  display: block;
   overflow: hidden;
-  background: var(--color-white);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-card);
-  transition: box-shadow 0.15s ease, transform 0.15s ease;
+  background: var(--color-white);
+  color: var(--color-ink);
 }
 
 .card:hover {
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
-  transform: translateY(-2px);
+  border-color: var(--color-ink);
 }
 
 .card__photo {
+  display: block;
   width: 100%;
-  aspect-ratio: 310 / 246;
+  aspect-ratio: 4 / 5;
   object-fit: cover;
 }
 
 .card__body {
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
-  padding: var(--space-5);
-}
-
-.card__heading {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  gap: var(--space-2);
+  padding: var(--space-4);
 }
 
 .card__name {
-  font: 600 19px/1.2 var(--font-sans);
-}
-
-.card__arrow {
-  width: 18px;
-  height: 18px;
-  color: var(--color-red);
+  font: 500 20px/1.2 var(--font-serif);
 }
 
 .card__meta {
-  font-size: 10px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
   color: var(--color-muted);
+  font-size: 12px;
 }
 
 .card__quote {
-  font: italic 400 17px/1.4 var(--font-serif);
+  font: italic 400 14px/1.4 var(--font-serif);
+}
+
+.card__save {
+  position: absolute;
+  top: var(--space-3);
+  z-index: 2;
+  right: var(--space-3);
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--color-white);
+  color: var(--color-ink);
+  cursor: pointer;
+}
+
+.card__save:hover {
+  color: var(--color-red);
+}
+
+.card__save svg {
+  width: 20px;
+  height: 20px;
+}
+
+.card__save--on {
+  color: var(--color-red);
+}
+
+.card__save--on svg {
+  fill: currentColor;
 }
